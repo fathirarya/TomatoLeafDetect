@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomatoLeafDetect - Predict</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='assets/tomat.png') }}" alt="Logo" class="logo-image">
+                TomatoLeafDetect
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="text-center">Predict Tomato Leaf Disease</h1>
+        {% if filename and prediction_result %}
+        <div class="card-result mx-auto mt-5">
+            <div class="card-body text-center">
+                <h5 class="card-title">Prediction Result</h5>
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image" class="img-fluid mb-4" style="max-width: 100%;">
+                <p class="card-text">Prediction Result: {{ prediction_result }}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="card mx-auto mt-5 ">
+            <div class="card-body text-center">
+                <h5 class="card-title">Upload Tomato Leaf Image</h5>
+                <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" name="file" id="fileInput" required>
+                        <label class="custom-file-label" for="fileInput">Choose file</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+    <footer class="text-center mt-auto py-3">
+        <p>© 2024 TomatoLeafDetect. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            var fileName = document.getElementById("fileInput").files[0].name;
+            var nextSibling = e.target.nextElementSibling;
+            nextSibling.innerText = fileName;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Ignore the tomato_fix folder
+tomato_fix/
+
+# Ignore the specific model file
+tomato_model_vgg16_25-06.h5

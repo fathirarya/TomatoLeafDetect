@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomatoLeafDetect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><img src="{{ url_for('static', filename='assets/tomat.png') }}" alt="" srcset="" class="logo-image"> TomatoLeafDetect</div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="animated-header">About TomatoLeafDetect</h1>
+        <p class="animated-description">
+            TomatoLeafDetect adalah aplikasi inovatif yang dirancang untuk membantu petani dan peneliti dalam mengidentifikasi berbagai penyakit yang menyerang daun tanaman tomat. Dengan teknologi terbaru dalam pengenalan gambar, aplikasi ini dapat memberikan diagnosa yang cepat dan akurat, sehingga petani dapat mengambil tindakan yang tepat untuk mengendalikan dan mencegah penyebaran penyakit lebih lanjut. Aplikasi ini tidak hanya mendukung keberlanjutan pertanian, tetapi juga membantu meningkatkan hasil panen dan kualitas produk tomat.
+        </p>
+        <section>
+            <h2>Penyakit Daun Tanaman Tomat</h2>
+            <div class="row justify-content-center">
+                <!-- Card for Tomato Mosaic Virus -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalTomatoMosaicVirus">
+                        <div class="card-body">
+                            <h5 class="card-title">Mosaic Virus</h5>
+                            <p class="card-text">Virus mosaik tomat menyebabkan daun menguning dan muncul pola mosaik...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Target Spot -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalTargetSpot">
+                        <div class="card-body">
+                            <h5 class="card-title">Target Spot</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh jamur Corynespora cassiicola...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Bacterial Spot -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalBacterialSpot">
+                        <div class="card-body">
+                            <h5 class="card-title">Bacterial Spot</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh bakteri Xanthomonas campestris pv. vesicatoria...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Tomato Yellow Leaf Curl Virus -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalTomatoYellowLeafCurlVirus">
+                        <div class="card-body">
+                            <h5 class="card-title">Yellow Leaf Curl Virus</h5>
+                            <p class="card-text">Virus ini menyebabkan daun menguning, menggulung, dan tanaman menjadi kerdil...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Late Blight -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalLateBlight">
+                        <div class="card-body">
+                            <h5 class="card-title">Late Blight</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh jamur Phytophthora infestans...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Leaf Mold -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalLeafMold">
+                        <div class="card-body">
+                            <h5 class="card-title">Leaf Mold</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh jamur Fulvia fulva...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Early Blight -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalEarlyBlight">
+                        <div class="card-body">
+                            <h5 class="card-title">Early Blight</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh jamur Alternaria solani...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Spider Mites -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalSpiderMites">
+                        <div class="card-body">
+                            <h5 class="card-title">Spider Mites</h5>
+                            <p class="card-text">Tungau laba-laba, terutama tungau dua bercak (Tetranychus urticae)...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Healthy Tomato -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalTomatoHealthy">
+                        <div class="card-body">
+                            <h5 class="card-title">Healthy</h5>
+                            <p class="card-text">Tanaman tomat sehat memiliki daun yang hijau segar...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card for Septoria Leaf Spot -->
+                <div class="col-md-4">
+                    <div class="card" data-toggle="modal" data-target="#modalSeptoriaLeafSpot">
+                        <div class="card-body">
+                            <h5 class="card-title">Septoria Leaf Spot</h5>
+                            <p class="card-text">Penyakit ini disebabkan oleh jamur Septoria lycopersici...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 TomatoLeafDetect. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal for Tomato Mosaic Virus -->
+    <div class="modal fade" id="modalTomatoMosaicVirus" tabindex="-1" aria-labelledby="modalLabelTomatoMosaicVirus" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelTomatoMosaicVirus">Tomato Mosaic Virus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/mosaic_virus.JPG') }}" class="img-fluid" alt="Tomato Mosaic Virus">
+                    <p><strong>Deskripsi:</strong> Virus mosaik tomat menyebabkan daun menguning dan muncul pola mosaik hijau tua dan muda. Daun yang terinfeksi mungkin menjadi berkerut dan berubah bentuk.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan benih yang bebas virus, hindari menyentuh tanaman yang sehat setelah menangani tanaman yang terinfeksi, dan buang tanaman yang terinfeksi.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Target Spot -->
+    <div class="modal fade" id="modalTargetSpot" tabindex="-1" aria-labelledby="modalLabelTargetSpot" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelTargetSpot">Target Spot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/target_spot.JPG') }}" class="img-fluid" alt="Target Spot">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh jamur Corynespora cassiicola. Gejalanya adalah munculnya bercak coklat bulat dengan pusat yang lebih terang di daun.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Jaga kebersihan kebun, gunakan fungisida sesuai rekomendasi, dan hindari penyiraman daun.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Bacterial Spot -->
+    <div class="modal fade" id="modalBacterialSpot" tabindex="-1" aria-labelledby="modalLabelBacterialSpot" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelBacterialSpot">Bacterial Spot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/bacterial_spot.JPG') }}" class="img-fluid" alt="Bacterial Spot">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh bakteri Xanthomonas campestris pv. vesicatoria. Gejalanya adalah munculnya bercak hitam kecil dengan lingkaran kuning pada daun.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan benih yang bebas penyakit, hindari irigasi overhead, dan buang tanaman yang terinfeksi.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Tomato Yellow Leaf Curl Virus -->
+    <div class="modal fade" id="modalTomatoYellowLeafCurlVirus" tabindex="-1" aria-labelledby="modalLabelTomatoYellowLeafCurlVirus" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelTomatoYellowLeafCurlVirus">Tomato Yellow Leaf Curl Virus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/yellow_leaf_curl.JPG') }}" class="img-fluid" alt="Tomato Yellow Leaf Curl Virus">
+                    <p><strong>Deskripsi:</strong> Virus ini menyebabkan daun menguning, menggulung, dan tanaman menjadi kerdil. Penyakit ini disebarkan oleh kutu kebul.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan varietas yang tahan virus, kendalikan populasi kutu kebul, dan cabut serta buang tanaman yang terinfeksi.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Late Blight -->
+    <div class="modal fade" id="modalLateBlight" tabindex="-1" aria-labelledby="modalLabelLateBlight" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelLateBlight">Late Blight</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/late_blight.JPG') }}" class="img-fluid" alt="Late Blight">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh jamur Phytophthora infestans. Gejalanya meliputi bercak coklat besar pada daun dan batang yang lembab dan berair.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan fungisida, buang tanaman yang terinfeksi, dan hindari penyiraman berlebih.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Leaf Mold -->
+    <div class="modal fade" id="modalLeafMold" tabindex="-1" aria-labelledby="modalLabelLeafMold" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelLeafMold">Leaf Mold</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/leaf_mold.JPG') }}" class="img-fluid" alt="Leaf Mold">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh jamur Fulvia fulva. Gejalanya adalah munculnya bercak kuning pada daun yang kemudian berubah menjadi coklat dan berjamur.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Jaga sirkulasi udara yang baik, hindari penyiraman berlebih, dan gunakan fungisida.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Early Blight -->
+    <div class="modal fade" id="modalEarlyBlight" tabindex="-1" aria-labelledby="modalLabelEarlyBlight" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelEarlyBlight">Early Blight</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/early_blight.JPG') }}" class="img-fluid" alt="Early Blight">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh jamur Alternaria solani. Gejalanya adalah munculnya bercak coklat dengan lingkaran konsentris pada daun.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan rotasi tanaman, buang daun yang terinfeksi, dan aplikasikan fungisida.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Spider Mites -->
+    <div class="modal fade" id="modalSpiderMites" tabindex="-1" aria-labelledby="modalLabelSpiderMites" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelSpiderMites">Spider Mites</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/spider.JPG') }}" class="img-fluid" alt="Spider Mites">
+                    <p><strong>Deskripsi:</strong> Tungau laba-laba, terutama tungau dua bercak (Tetranychus urticae), menyebabkan daun menguning, mengering, dan jatuh.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Gunakan pestisida, jaga kelembaban yang cukup, dan kendalikan populasi tungau dengan musuh alami.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Healthy Tomato -->
+    <div class="modal fade" id="modalTomatoHealthy" tabindex="-1" aria-labelledby="modalLabelTomatoHealthy" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelTomatoHealthy">Tomato (Healthy)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/healty.JPG') }}" class="img-fluid" alt="Tomato Healthy">
+                    <p><strong>Deskripsi:</strong> Tanaman tomat sehat memiliki daun yang hijau segar, bebas dari bercak, keriting, atau perubahan warna.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Pastikan kondisi tumbuh yang optimal, seperti tanah yang subur, pengairan yang cukup, dan perlindungan dari hama dan penyakit.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Septoria Leaf Spot -->
+    <div class="modal fade" id="modalSeptoriaLeafSpot" tabindex="-1" aria-labelledby="modalLabelSeptoriaLeafSpot" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelSeptoriaLeafSpot">Septoria Leaf Spot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ url_for('static', filename='assets/septoria.JPG') }}" class="img-fluid" alt="Septoria Leaf Spot">
+                    <p><strong>Deskripsi:</strong> Penyakit ini disebabkan oleh jamur Septoria lycopersici. Gejalanya adalah munculnya bercak kecil berwarna coklat dengan pusat yang lebih terang di daun.</p>
+                    <p><strong>Pencegahan dan Pengendalian:</strong> Jaga kebersihan kebun, hindari penyiraman daun, dan gunakan fungisida sesuai rekomendasi.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
